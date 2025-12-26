@@ -35,6 +35,7 @@ export default function Home() {
   const [cornerImageTopRight, setCornerImageTopRight] = useState<string | null>(null);
   const [cornerImageBottomLeft, setCornerImageBottomLeft] = useState<string | null>(null);
   const [cornerItemSize, setCornerItemSize] = useState(40);
+  const [cornerIconOpacity, setCornerIconOpacity] = useState(0.4);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const cornerFileInputRefTL = useRef<HTMLInputElement>(null);
   const cornerFileInputRefTR = useRef<HTMLInputElement>(null);
@@ -183,6 +184,7 @@ export default function Home() {
                   cornerImageTopRight={cornerImageTopRight}
                   cornerImageBottomLeft={cornerImageBottomLeft}
                   cornerItemSize={cornerItemSize}
+                  cornerIconOpacity={cornerIconOpacity}
                 />
               </div>
             </div>
@@ -399,19 +401,35 @@ export default function Home() {
                 </div>
 
                 {(cornerImageTopLeft || cornerImageTopRight || cornerImageBottomLeft) && (
-                  <div className="mt-3">
-                    <label className="label text-xs flex justify-between">
-                      Size <span>{cornerItemSize}px</span>
-                    </label>
-                    <input
-                      type="range"
-                      min="20"
-                      max="100"
-                      step="1"
-                      value={cornerItemSize}
-                      onChange={(e) => setCornerItemSize(parseInt(e.target.value))}
-                      className="w-full accent-violet-500 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
-                    />
+                  <div className="mt-3 space-y-3">
+                    <div>
+                      <label className="label text-xs flex justify-between">
+                        Size <span>{cornerItemSize}px</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="20"
+                        max="100"
+                        step="1"
+                        value={cornerItemSize}
+                        onChange={(e) => setCornerItemSize(parseInt(e.target.value))}
+                        className="w-full accent-violet-500 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                      />
+                    </div>
+                    <div>
+                      <label className="label text-xs flex justify-between">
+                        Opacity <span>{Math.round(cornerIconOpacity * 100)}%</span>
+                      </label>
+                      <input
+                        type="range"
+                        min="0.1"
+                        max="1"
+                        step="0.1"
+                        value={cornerIconOpacity}
+                        onChange={(e) => setCornerIconOpacity(parseFloat(e.target.value))}
+                        className="w-full accent-violet-500 h-2 bg-white/10 rounded-lg appearance-none cursor-pointer"
+                      />
+                    </div>
                   </div>
                 )}
               </div>
